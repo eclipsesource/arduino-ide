@@ -12,6 +12,7 @@ import {
   BoardsPackage,
   AttachedBoardsChangeEvent,
   BoardWithPackage,
+  BoardUserField,
 } from '../../common/protocol';
 import { BoardsConfig } from './boards-config';
 import { naturalCompare } from '../../common/utils';
@@ -180,8 +181,8 @@ export class BoardsServiceProvider implements FrontendApplicationContribution {
         const selectedAvailableBoard = AvailableBoard.is(selectedBoard)
           ? selectedBoard
           : this._availableBoards.find((availableBoard) =>
-              Board.sameAs(availableBoard, selectedBoard)
-            );
+            Board.sameAs(availableBoard, selectedBoard)
+          );
         if (
           selectedAvailableBoard &&
           selectedAvailableBoard.selected &&
@@ -271,6 +272,18 @@ export class BoardsServiceProvider implements FrontendApplicationContribution {
     return boards;
   }
 
+  async selectedBoardUserFields(): Promise<BoardUserField[]> {
+    if (!this._boardsConfig.selectedBoard || !this._boardsConfig.selectedPort) {
+      return [];
+    }
+    const fqbn = this._boardsConfig.selectedBoard.fqbn;
+    if (!fqbn) {
+      return [];
+    }
+    const protocol = this._boardsConfig.selectedPort.protocol;
+    return await this.boardsService.getBoardUserFields({ fqbn, protocol });
+  }
+
   /**
    * `true` if the `config.selectedBoard` is defined; hence can compile against the board. Otherwise, `false`.
    */
@@ -358,14 +371,14 @@ export class BoardsServiceProvider implements FrontendApplicationContribution {
     const timeoutTask =
       !!timeout && timeout > 0
         ? new Promise<void>((_, reject) =>
-            setTimeout(
-              () => reject(new Error(`Timeout after ${timeout} ms.`)),
-              timeout
-            )
+          setTimeout(
+            () => reject(new Error(`Timeout after ${timeout} ms.`)),
+            timeout
           )
+        )
         : new Promise<void>(() => {
-            /* never */
-          });
+          /* never */
+        });
     const waitUntilTask = new Promise<void>((resolve) => {
       let candidate = find(what, this.availableBoards);
       if (candidate) {
@@ -499,9 +512,8 @@ export class BoardsServiceProvider implements FrontendApplicationContribution {
 
   protected getLastSelectedBoardOnPortKey(port: Port | string): string {
     // TODO: we lose the port's `protocol` info (`serial`, `network`, etc.) here if the `port` is a `string`.
-    return `last-selected-board-on-port:${
-      typeof port === 'string' ? port : Port.toString(port)
-    }`;
+    return `last-selected-board-on-port:${typeof port === 'string' ? port : Port.toString(port)
+      }`;
   }
 
   protected async loadState(): Promise<void> {

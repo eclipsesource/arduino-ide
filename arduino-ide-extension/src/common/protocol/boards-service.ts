@@ -134,7 +134,7 @@ export const BoardsServicePath = '/services/boards-service';
 export const BoardsService = Symbol('BoardsService');
 export interface BoardsService
   extends Installable<BoardsPackage>,
-    Searchable<BoardsPackage> {
+  Searchable<BoardsPackage> {
   /**
    * Deprecated. `getState` should be used to correctly map a board with a port.
    * @deprecated
@@ -152,6 +152,7 @@ export interface BoardsService
     fqbn: string;
   }): Promise<BoardsPackage | undefined>;
   searchBoards({ query }: { query?: string }): Promise<BoardWithPackage[]>;
+  getBoardUserFields(options: { fqbn: string, protocol: string }): Promise<BoardUserField[]>;
 }
 
 export interface Port {
@@ -340,6 +341,14 @@ export interface Board {
   readonly name: string;
   readonly fqbn?: string;
   readonly port?: Port;
+}
+
+export interface BoardUserField {
+  readonly toolId: string;
+  readonly name: string;
+  readonly label: string;
+  readonly secret: boolean;
+  value: string;
 }
 
 export interface BoardWithPackage extends Board {
