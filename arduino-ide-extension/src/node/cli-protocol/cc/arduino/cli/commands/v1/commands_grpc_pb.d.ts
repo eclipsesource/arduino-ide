@@ -40,6 +40,7 @@ interface IArduinoCoreServiceService extends grpc.ServiceDefinition<grpc.Untyped
     platformUpgrade: IArduinoCoreServiceService_IPlatformUpgrade;
     upload: IArduinoCoreServiceService_IUpload;
     uploadUsingProgrammer: IArduinoCoreServiceService_IUploadUsingProgrammer;
+    supportedUserFields: IArduinoCoreServiceService_ISupportedUserFields;
     listProgrammersAvailableForUpload: IArduinoCoreServiceService_IListProgrammersAvailableForUpload;
     burnBootloader: IArduinoCoreServiceService_IBurnBootloader;
     platformSearch: IArduinoCoreServiceService_IPlatformSearch;
@@ -271,6 +272,15 @@ interface IArduinoCoreServiceService_IUploadUsingProgrammer extends grpc.MethodD
     responseSerialize: grpc.serialize<cc_arduino_cli_commands_v1_upload_pb.UploadUsingProgrammerResponse>;
     responseDeserialize: grpc.deserialize<cc_arduino_cli_commands_v1_upload_pb.UploadUsingProgrammerResponse>;
 }
+interface IArduinoCoreServiceService_ISupportedUserFields extends grpc.MethodDefinition<cc_arduino_cli_commands_v1_upload_pb.SupportedUserFieldsRequest, cc_arduino_cli_commands_v1_upload_pb.SupportedUserFieldsResponse> {
+    path: "/cc.arduino.cli.commands.v1.ArduinoCoreService/SupportedUserFields";
+    requestStream: false;
+    responseStream: false;
+    requestSerialize: grpc.serialize<cc_arduino_cli_commands_v1_upload_pb.SupportedUserFieldsRequest>;
+    requestDeserialize: grpc.deserialize<cc_arduino_cli_commands_v1_upload_pb.SupportedUserFieldsRequest>;
+    responseSerialize: grpc.serialize<cc_arduino_cli_commands_v1_upload_pb.SupportedUserFieldsResponse>;
+    responseDeserialize: grpc.deserialize<cc_arduino_cli_commands_v1_upload_pb.SupportedUserFieldsResponse>;
+}
 interface IArduinoCoreServiceService_IListProgrammersAvailableForUpload extends grpc.MethodDefinition<cc_arduino_cli_commands_v1_upload_pb.ListProgrammersAvailableForUploadRequest, cc_arduino_cli_commands_v1_upload_pb.ListProgrammersAvailableForUploadResponse> {
     path: "/cc.arduino.cli.commands.v1.ArduinoCoreService/ListProgrammersAvailableForUpload";
     requestStream: false;
@@ -416,6 +426,7 @@ export interface IArduinoCoreServiceServer {
     platformUpgrade: grpc.handleServerStreamingCall<cc_arduino_cli_commands_v1_core_pb.PlatformUpgradeRequest, cc_arduino_cli_commands_v1_core_pb.PlatformUpgradeResponse>;
     upload: grpc.handleServerStreamingCall<cc_arduino_cli_commands_v1_upload_pb.UploadRequest, cc_arduino_cli_commands_v1_upload_pb.UploadResponse>;
     uploadUsingProgrammer: grpc.handleServerStreamingCall<cc_arduino_cli_commands_v1_upload_pb.UploadUsingProgrammerRequest, cc_arduino_cli_commands_v1_upload_pb.UploadUsingProgrammerResponse>;
+    supportedUserFields: grpc.handleUnaryCall<cc_arduino_cli_commands_v1_upload_pb.SupportedUserFieldsRequest, cc_arduino_cli_commands_v1_upload_pb.SupportedUserFieldsResponse>;
     listProgrammersAvailableForUpload: grpc.handleUnaryCall<cc_arduino_cli_commands_v1_upload_pb.ListProgrammersAvailableForUploadRequest, cc_arduino_cli_commands_v1_upload_pb.ListProgrammersAvailableForUploadResponse>;
     burnBootloader: grpc.handleServerStreamingCall<cc_arduino_cli_commands_v1_upload_pb.BurnBootloaderRequest, cc_arduino_cli_commands_v1_upload_pb.BurnBootloaderResponse>;
     platformSearch: grpc.handleUnaryCall<cc_arduino_cli_commands_v1_core_pb.PlatformSearchRequest, cc_arduino_cli_commands_v1_core_pb.PlatformSearchResponse>;
@@ -491,6 +502,9 @@ export interface IArduinoCoreServiceClient {
     upload(request: cc_arduino_cli_commands_v1_upload_pb.UploadRequest, metadata?: grpc.Metadata, options?: Partial<grpc.CallOptions>): grpc.ClientReadableStream<cc_arduino_cli_commands_v1_upload_pb.UploadResponse>;
     uploadUsingProgrammer(request: cc_arduino_cli_commands_v1_upload_pb.UploadUsingProgrammerRequest, options?: Partial<grpc.CallOptions>): grpc.ClientReadableStream<cc_arduino_cli_commands_v1_upload_pb.UploadUsingProgrammerResponse>;
     uploadUsingProgrammer(request: cc_arduino_cli_commands_v1_upload_pb.UploadUsingProgrammerRequest, metadata?: grpc.Metadata, options?: Partial<grpc.CallOptions>): grpc.ClientReadableStream<cc_arduino_cli_commands_v1_upload_pb.UploadUsingProgrammerResponse>;
+    supportedUserFields(request: cc_arduino_cli_commands_v1_upload_pb.SupportedUserFieldsRequest, callback: (error: grpc.ServiceError | null, response: cc_arduino_cli_commands_v1_upload_pb.SupportedUserFieldsResponse) => void): grpc.ClientUnaryCall;
+    supportedUserFields(request: cc_arduino_cli_commands_v1_upload_pb.SupportedUserFieldsRequest, metadata: grpc.Metadata, callback: (error: grpc.ServiceError | null, response: cc_arduino_cli_commands_v1_upload_pb.SupportedUserFieldsResponse) => void): grpc.ClientUnaryCall;
+    supportedUserFields(request: cc_arduino_cli_commands_v1_upload_pb.SupportedUserFieldsRequest, metadata: grpc.Metadata, options: Partial<grpc.CallOptions>, callback: (error: grpc.ServiceError | null, response: cc_arduino_cli_commands_v1_upload_pb.SupportedUserFieldsResponse) => void): grpc.ClientUnaryCall;
     listProgrammersAvailableForUpload(request: cc_arduino_cli_commands_v1_upload_pb.ListProgrammersAvailableForUploadRequest, callback: (error: grpc.ServiceError | null, response: cc_arduino_cli_commands_v1_upload_pb.ListProgrammersAvailableForUploadResponse) => void): grpc.ClientUnaryCall;
     listProgrammersAvailableForUpload(request: cc_arduino_cli_commands_v1_upload_pb.ListProgrammersAvailableForUploadRequest, metadata: grpc.Metadata, callback: (error: grpc.ServiceError | null, response: cc_arduino_cli_commands_v1_upload_pb.ListProgrammersAvailableForUploadResponse) => void): grpc.ClientUnaryCall;
     listProgrammersAvailableForUpload(request: cc_arduino_cli_commands_v1_upload_pb.ListProgrammersAvailableForUploadRequest, metadata: grpc.Metadata, options: Partial<grpc.CallOptions>, callback: (error: grpc.ServiceError | null, response: cc_arduino_cli_commands_v1_upload_pb.ListProgrammersAvailableForUploadResponse) => void): grpc.ClientUnaryCall;
@@ -585,6 +599,9 @@ export class ArduinoCoreServiceClient extends grpc.Client implements IArduinoCor
     public upload(request: cc_arduino_cli_commands_v1_upload_pb.UploadRequest, metadata?: grpc.Metadata, options?: Partial<grpc.CallOptions>): grpc.ClientReadableStream<cc_arduino_cli_commands_v1_upload_pb.UploadResponse>;
     public uploadUsingProgrammer(request: cc_arduino_cli_commands_v1_upload_pb.UploadUsingProgrammerRequest, options?: Partial<grpc.CallOptions>): grpc.ClientReadableStream<cc_arduino_cli_commands_v1_upload_pb.UploadUsingProgrammerResponse>;
     public uploadUsingProgrammer(request: cc_arduino_cli_commands_v1_upload_pb.UploadUsingProgrammerRequest, metadata?: grpc.Metadata, options?: Partial<grpc.CallOptions>): grpc.ClientReadableStream<cc_arduino_cli_commands_v1_upload_pb.UploadUsingProgrammerResponse>;
+    public supportedUserFields(request: cc_arduino_cli_commands_v1_upload_pb.SupportedUserFieldsRequest, callback: (error: grpc.ServiceError | null, response: cc_arduino_cli_commands_v1_upload_pb.SupportedUserFieldsResponse) => void): grpc.ClientUnaryCall;
+    public supportedUserFields(request: cc_arduino_cli_commands_v1_upload_pb.SupportedUserFieldsRequest, metadata: grpc.Metadata, callback: (error: grpc.ServiceError | null, response: cc_arduino_cli_commands_v1_upload_pb.SupportedUserFieldsResponse) => void): grpc.ClientUnaryCall;
+    public supportedUserFields(request: cc_arduino_cli_commands_v1_upload_pb.SupportedUserFieldsRequest, metadata: grpc.Metadata, options: Partial<grpc.CallOptions>, callback: (error: grpc.ServiceError | null, response: cc_arduino_cli_commands_v1_upload_pb.SupportedUserFieldsResponse) => void): grpc.ClientUnaryCall;
     public listProgrammersAvailableForUpload(request: cc_arduino_cli_commands_v1_upload_pb.ListProgrammersAvailableForUploadRequest, callback: (error: grpc.ServiceError | null, response: cc_arduino_cli_commands_v1_upload_pb.ListProgrammersAvailableForUploadResponse) => void): grpc.ClientUnaryCall;
     public listProgrammersAvailableForUpload(request: cc_arduino_cli_commands_v1_upload_pb.ListProgrammersAvailableForUploadRequest, metadata: grpc.Metadata, callback: (error: grpc.ServiceError | null, response: cc_arduino_cli_commands_v1_upload_pb.ListProgrammersAvailableForUploadResponse) => void): grpc.ClientUnaryCall;
     public listProgrammersAvailableForUpload(request: cc_arduino_cli_commands_v1_upload_pb.ListProgrammersAvailableForUploadRequest, metadata: grpc.Metadata, options: Partial<grpc.CallOptions>, callback: (error: grpc.ServiceError | null, response: cc_arduino_cli_commands_v1_upload_pb.ListProgrammersAvailableForUploadResponse) => void): grpc.ClientUnaryCall;

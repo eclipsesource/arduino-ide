@@ -664,6 +664,28 @@ function deserialize_cc_arduino_cli_commands_v1_PlatformUpgradeResponse(buffer_a
   return cc_arduino_cli_commands_v1_core_pb.PlatformUpgradeResponse.deserializeBinary(new Uint8Array(buffer_arg));
 }
 
+function serialize_cc_arduino_cli_commands_v1_SupportedUserFieldsRequest(arg) {
+  if (!(arg instanceof cc_arduino_cli_commands_v1_upload_pb.SupportedUserFieldsRequest)) {
+    throw new Error('Expected argument of type cc.arduino.cli.commands.v1.SupportedUserFieldsRequest');
+  }
+  return Buffer.from(arg.serializeBinary());
+}
+
+function deserialize_cc_arduino_cli_commands_v1_SupportedUserFieldsRequest(buffer_arg) {
+  return cc_arduino_cli_commands_v1_upload_pb.SupportedUserFieldsRequest.deserializeBinary(new Uint8Array(buffer_arg));
+}
+
+function serialize_cc_arduino_cli_commands_v1_SupportedUserFieldsResponse(arg) {
+  if (!(arg instanceof cc_arduino_cli_commands_v1_upload_pb.SupportedUserFieldsResponse)) {
+    throw new Error('Expected argument of type cc.arduino.cli.commands.v1.SupportedUserFieldsResponse');
+  }
+  return Buffer.from(arg.serializeBinary());
+}
+
+function deserialize_cc_arduino_cli_commands_v1_SupportedUserFieldsResponse(buffer_arg) {
+  return cc_arduino_cli_commands_v1_upload_pb.SupportedUserFieldsResponse.deserializeBinary(new Uint8Array(buffer_arg));
+}
+
 function serialize_cc_arduino_cli_commands_v1_UpdateCoreLibrariesIndexRequest(arg) {
   if (!(arg instanceof cc_arduino_cli_commands_v1_commands_pb.UpdateCoreLibrariesIndexRequest)) {
     throw new Error('Expected argument of type cc.arduino.cli.commands.v1.UpdateCoreLibrariesIndexRequest');
@@ -1137,6 +1159,19 @@ uploadUsingProgrammer: {
     requestDeserialize: deserialize_cc_arduino_cli_commands_v1_UploadUsingProgrammerRequest,
     responseSerialize: serialize_cc_arduino_cli_commands_v1_UploadUsingProgrammerResponse,
     responseDeserialize: deserialize_cc_arduino_cli_commands_v1_UploadUsingProgrammerResponse,
+  },
+  // Returns the list of users fields necessary to upload to that board
+// using the specified protocol.
+supportedUserFields: {
+    path: '/cc.arduino.cli.commands.v1.ArduinoCoreService/SupportedUserFields',
+    requestStream: false,
+    responseStream: false,
+    requestType: cc_arduino_cli_commands_v1_upload_pb.SupportedUserFieldsRequest,
+    responseType: cc_arduino_cli_commands_v1_upload_pb.SupportedUserFieldsResponse,
+    requestSerialize: serialize_cc_arduino_cli_commands_v1_SupportedUserFieldsRequest,
+    requestDeserialize: deserialize_cc_arduino_cli_commands_v1_SupportedUserFieldsRequest,
+    responseSerialize: serialize_cc_arduino_cli_commands_v1_SupportedUserFieldsResponse,
+    responseDeserialize: deserialize_cc_arduino_cli_commands_v1_SupportedUserFieldsResponse,
   },
   // List programmers available for a board.
 listProgrammersAvailableForUpload: {
