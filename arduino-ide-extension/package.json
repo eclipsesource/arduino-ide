@@ -22,7 +22,7 @@
     "@theia/application-package": "1.18.0",
     "@theia/core": "1.18.0",
     "@theia/editor": "1.18.0",
-		"@theia/editor-preview": "1.18.0",
+    "@theia/editor-preview": "1.18.0",
     "@theia/filesystem": "1.18.0",
     "@theia/git": "1.18.0",
     "@theia/keymaps": "1.18.0",
@@ -146,7 +146,7 @@
   ],
   "arduino": {
     "cli": {
-      "version": "0.19.1"
+      "version": "0.19.3"
     },
     "fwuploader": {
       "version": "2.0.0"
