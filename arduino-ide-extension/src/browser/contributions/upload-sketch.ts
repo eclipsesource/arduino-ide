@@ -232,8 +232,8 @@ export class UploadSketch extends SketchContribution {
       const optimizeForDebug = this.editorMode.compileForDebug;
       const { selectedPort } = boardsConfig;
       const port = selectedPort;
-      const userFields = this.cachedUserFields.get(this.selectedFqbnAddress());
-      if (!userFields) {
+      const userFields = this.cachedUserFields.get(this.selectedFqbnAddress()) ?? [] as BoardUserField[];
+      if (userFields.length === 0 && this.boardRequiresUserFields) {
         this.messageService.error(nls.localize('arduino/sketch/userFieldsNotFoundError', "Can't find user fields for connected board"));
         return;
       }
