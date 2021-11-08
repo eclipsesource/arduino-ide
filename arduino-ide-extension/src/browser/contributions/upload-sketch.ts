@@ -63,7 +63,7 @@ export class UploadSketch extends SketchContribution {
     if (!fqbn) {
       return "";
     }
-    const address = boardsConfig.selectedBoard?.port?.address
+    const address = boardsConfig.selectedPort?.address;
     if (!address) {
       return "";
     }
